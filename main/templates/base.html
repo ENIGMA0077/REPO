@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enigma Encyclopedia - Universe Knowledge</title>
+    <meta name="description" content="All about universe, galaxies, animals and science">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+<header class="p-6 bg-gray-950 border-b border-gray-800">
+    <h1 class="text-3xl font-bold text-cyan-400">🌌 ENIGMA ENCYCLOPEDIA</h1>
+
+    <nav class="mt-2">
+        <a class="text-cyan-300 mr-4" href="/">Home</a>
+        <a class="text-cyan-300 mr-4" href="/galaxies/">Galaxies</a>
+    </nav>
+</header>
+
+<main class="p-6">
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>
