@@ -1,0 +1,92 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<h2>🌌 Enigma Knowledge System</h2>
+
+<p class="subtitle">
+    Hover and click cards to explore reality
+</p>
+
+<div class="grid">
+
+    <a href="/article/black-holes/"
+       class="card"
+       data-bg="blackhole"
+       onclick="breakCard(event, this)">
+
+        <h3>🕳 Black Holes</h3>
+
+        <p>
+            Cosmic objects with gravity so strong that light cannot escape.
+        </p>
+    </a>
+
+
+    <a href="/article/dark-matter/"
+       class="card"
+       data-bg="dark-matter"
+       onclick="breakCard(event, this)">
+
+        <h3>🌑 Dark Matter</h3>
+
+        <p>
+            Invisible matter shaping galaxies across the universe.
+        </p>
+    </a>
+
+
+    <a href="/article/environment/"
+       class="card"
+       data-bg="environment"
+       onclick="breakCard(event, this)">
+
+        <h3>🍀 Environment</h3>
+
+        <p>
+            Nature, ecosystems, climate and Earth's balance.
+        </p>
+    </a>
+
+
+    <a href="/article/quantum/"
+       class="card"
+       data-bg="quantum"
+       onclick="breakCard(event, this)">
+
+        <h3>⚛ Quantum Physics</h3>
+
+        <p>
+            Strange laws governing atoms and particles.
+        </p>
+    </a>
+
+
+    <a href="/article/micro-world/"
+       class="card"
+       data-bg="micro-world"
+       onclick="breakCard(event, this)">
+
+        <h3>🦋 Micro World</h3>
+
+        <p>
+            Insects, mollusks, bacteria, bees and hidden tiny life forms.
+        </p>
+    </a>
+
+
+    <a href="/article/macro-world/"
+       class="card"
+       data-bg="macro-world"
+       onclick="breakCard(event, this)">
+
+        <h3>🐘 Macro World</h3>
+
+        <p>
+            Giant animals, predators, oceans and massive ecosystems.
+        </p>
+    </a>
+
+</div>
+
+{% endblock %}
