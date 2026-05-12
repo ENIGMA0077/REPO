@@ -21,6 +21,15 @@ def micro(request):
 def macro(request):
     return render(request, "main/article_macro.html")
 
+def milky_way(request):
+    return render(request, "galaxies/milky_way.html")
+
+def andromeda(request):
+    return render(request, "galaxies/andromeda.html")
+
+def deep_space(request):
+    return render(request, "galaxies/deep_space.html")
+
 def galaxies(request):
     return render(request, 'main/galaxies.html')
 

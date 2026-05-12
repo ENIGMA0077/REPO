@@ -67,17 +67,16 @@
 
 <body>
 
+    <video id="bgVideo" autoplay muted loop playsinline></video>
+
     <canvas id="space"></canvas>
 
-<audio id="glassSound">
-    <source src="{% static 'sounds/glass.mp3' %}" type="audio/mpeg">
-</audio>
 
 <header>
     <h1>🌌 Enigma Encyclopedia</h1>
     <nav>
         <a href="/">Home</a>
-        <a href="/galaxies/">Galaxies</a>
+        <a href="/galaxies/">🌌 Galaxy Archive</a>
     </nav>
 </header>
 
@@ -101,8 +100,8 @@ document.querySelectorAll(".card").forEach(card => {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateX = ((y - centerY) / centerY) * -10;
-        const rotateY = ((x - centerX) / centerX) * 10;
+        const rotateX = ((y - centerY) / centerY) * -15;
+        const rotateY = ((x - centerX) / centerX) * 15;
 
         card.style.transform =
             `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
@@ -175,6 +174,7 @@ function breakCard(event, card) {
     }, 300);
 }
 </script>
+
 
 <script>
 
@@ -266,6 +266,65 @@ window.addEventListener("pageshow", () => {
     });
 
 });
+
+{% comment %} const isMobile = window.innerWidth < 768;
+
+const starsCount = isMobile ? 40 : 140;
+
+if (!isMobile) {
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = "cyan";
+}
+
+if (isMobile) {
+    document.getElementById("space").remove();
+} {% endcomment %}
+
+</script>
+
+
+<script>
+const video = document.getElementById("bgVideo");
+
+const backgrounds = {
+    milkyway: "/static/video/milkyway.mp4",
+    andromeda: "/static/video/andromeda.mp4",
+    deepspace: "/static/video/ton618.mp4"
+};
+
+document.querySelectorAll(".card").forEach(card => {
+
+    card.addEventListener("mouseenter", () => {
+
+        const bg = card.dataset.bg;
+
+        if (!backgrounds[bg]) return;
+
+        video.style.opacity = 0;
+
+        setTimeout(() => {
+            video.src = backgrounds[bg];
+            video.load();
+            video.play().catch(()=>{});
+            video.style.opacity = 1;
+        }, 200);
+    });
+
+});
+</script>
+
+<script>
+function warpJump(url) {
+
+    document.body.style.transition = "0.6s";
+    document.body.style.transform = "scale(0.95)";
+    document.body.style.filter = "blur(8px) brightness(0.5)";
+
+    setTimeout(() => {
+        window.location.href = url;
+    }, 500);
+}
+
 </script>
 
 </body>
