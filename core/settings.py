@@ -19,13 +19,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-g=(z)$=k!f4xw7t0i929aci@5mdm1v13qwok(-@m6#+1%^jw-2'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+SECRET_KEY =os.getenv("SECRET_KEY")
+
+ALLOWED_HOSTS = ["enigma-encyclopedia.onrender.com"]
 
 
 # Application definition
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'csp',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -58,7 +62,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,18 +136,28 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 CONTENT_SECURITY_POLICY = {
     "DIRECTIVES": {
         "default-src": ("'self'",),
-        "script-src": ("'self'",),
-        "style-src": ("'self'",),
+        "img-src": ("'self'", "data:", "https:"),
+        "media-src": ("'self'", "https:"),
+        "style-src": ("'self'", "'unsafe-inline'", "https:"),
+        "script-src": ("'self'", "'unsafe-inline'", "https:"),
+        "font-src": ("'self'", "https:", "data:"),
     }
 }
 
 SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = "DENY"
 SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = "DENY"
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
 
 
